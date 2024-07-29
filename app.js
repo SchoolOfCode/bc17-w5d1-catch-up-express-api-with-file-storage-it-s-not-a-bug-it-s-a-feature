@@ -30,3 +30,31 @@ app.get('/api/recipes', async (req,res) => {
     console.error('Error reading file:', error);
 }  
 })
+
+app.get('/api/recipes/:id', async (req,res) => {
+  const recipeID = req.params.id;
+  try {
+    const recipes = await getRecipeByID('./recipes.json', recipeID);
+
+    if (recipes !== null) {
+      res.status(200).json ({ 
+        "Success: ": true,
+        "Payload: ": recipes
+      })    
+    }else {
+      res.status(404).json ({
+        "Success: " : false,
+        "Message: " : "Recipe not found"
+      })
+    }
+  }
+  catch (error) {
+    console.error('Error reading file:', error);
+  }
+  
+})
+
+
+
+
+

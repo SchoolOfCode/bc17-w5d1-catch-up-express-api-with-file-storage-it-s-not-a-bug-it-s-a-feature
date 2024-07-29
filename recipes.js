@@ -16,7 +16,13 @@ export async function getRecipes(filePath) {
 
 
 // GET A RECIPE BY ID
-export async function getRecipeByID(id) {}
+export async function getRecipeByID(filePath, id) {
+    const existingRecipes = await getRecipes(filePath);
+
+    const recipe = existingRecipes.find(recipe => recipe.id === id);
+
+    return recipe || null;
+}
 
 // CREATE A RECIPE
 export async function createRecipe(newRecipe) {}
