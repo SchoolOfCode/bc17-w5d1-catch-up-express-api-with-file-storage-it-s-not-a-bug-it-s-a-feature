@@ -25,8 +25,18 @@ export async function getRecipeByID(filePath, id) {
 }
 
 // CREATE A RECIPE
-export async function createRecipe(newRecipe) {}
-
+//to read data from file
+export async function createRecipe(filePath, newRecipe) {
+    try {
+    const existingRecipes = await getRecipes(filePath);
+    //modify existingRecipes rather than make a new variable that is the value of existingRecipes + newRecipe pushed on
+    existingRecipes.push(newRecipe);
+    //write data to the file. we need null and 2 to make data readable, else it's a long string, no line breaks
+    await fs.writeFile(filePath, JSON.stringify(existingRecipes, null, 2));
+} catch (error) {
+    console.error('Error reading file:', error);
+}
+}
 // UPDATE A RECIPE BY ID
 export async function updateRecipeByID(id, updatedRecipe) {}
 
