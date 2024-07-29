@@ -1,12 +1,12 @@
 import fs from "node:fs/promises";
 import { v4 as uuidv4 } from "uuid";
 
-const fileName = "recipes.json";
+const filePath = "./recipes.json";
 
 // GET ALL RECIPES
-export async function getRecipes(fileName) {
+export async function getRecipes(filePath) {
         try {
-            const data = await fs.readFile(fileName, 'utf-8');
+            const data = await fs.readFile(filePath, 'utf-8');
             const jsonData = JSON.parse(data);
             return jsonData;
         } catch (error) {

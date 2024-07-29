@@ -21,7 +21,7 @@ app.listen(PORT, () => {
 
 app.get('/api/recipes', async (req,res) => {
   try {
-    const recipes = await getRecipes();
+    const recipes = await getRecipes('./recipes.json');
     res.status(200).json ({
       "Success: ": true,
       "Payload: ": recipes
