@@ -91,7 +91,7 @@ app.post("/api/recipes", async (req, res) => {
     }
 });
 
-app.patch('/app/recipes/:id', (req, res) => {
+app.patch('/app/recipes/:id', async (req, res) => {
     
     // Get json object with matching ID 
     // Get updated recipe
@@ -100,7 +100,7 @@ app.patch('/app/recipes/:id', (req, res) => {
     const recipeID = req.params.id;
     const updatedRecipe = req.body;
 
-    updateRecipeByID("./recipes.json", recipeID, updatedRecipe)
+    
 
     if (!updatedRecipe || !updatedRecipe.title || !updatedRecipe.ingredients || !updatedRecipe.instructions || !updatedRecipe.image) {
         res.status(404).json({ 
@@ -109,6 +109,7 @@ app.patch('/app/recipes/:id', (req, res) => {
         });
     }
     try {
+        await updateRecipeByID("./recipes.json", recipeID, updatedRecipe);
         res.status(200).json ({
             "Success: ": true,
             "Payload: ": recipes
