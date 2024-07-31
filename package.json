@@ -1,7 +1,7 @@
 {
   "name": "workshops_servers",
   "version": "1.0.0",
-  "description": "",
+  "description": "You'll need to write some code to get this application running. Your server will function as an API like we've been building and also serve an HTML page.",
   "main": "app.js",
   "type": "module",
   "scripts": {

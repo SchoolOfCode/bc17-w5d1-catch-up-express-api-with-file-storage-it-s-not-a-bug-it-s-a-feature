@@ -90,3 +90,31 @@ app.post("/api/recipes", async (req, res) => {
         res.status(500).json({ error: "Error accessing file" });
     }
 });
+
+app.patch('/app/recipes/:id', (req, res) => {
+    
+    // Get json object with matching ID 
+    // Get updated recipe
+    // Call updateRecipeByID function which will update the original recipe with the new recipe
+    // Use try and catch to output the new recipe if sucessful or an error message if not   
+    const recipeID = req.params.id;
+    const updatedRecipe = req.body;
+
+    updateRecipeByID("./recipes.json", recipeID, updatedRecipe)
+
+    if (!updatedRecipe || !updatedRecipe.title || !updatedRecipe.ingredients || !updatedRecipe.instructions || !updatedRecipe.image) {
+        res.status(404).json({ 
+            "Success: ": false,
+            "Message: ": "Incorrect input"            
+        });
+    }
+    try {
+        res.status(200).json ({
+            "Success: ": true,
+            "Payload: ": recipes
+        })
+    } catch (error) {
+        console.error("Error reading file:", error);
+        res.status(500).json({ error: "Error accessing file" });
+    }
+})
